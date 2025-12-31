@@ -8,16 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
+        /* --- BAGIAN PENGATURAN WARNA (TONE DARI GAMBAR) --- */
         :root {
-            --bg-body: #f5f6fa;
-            --text-main: #333;
-            --text-light: #888;
-            --purple-primary: #5e5ce6;
-            --purple-light: #eaddff;
-            --yellow-card: #fdd05d;
-            --purple-card: #4f46bb;
-            --pink-card: #f26488;
-            --soft-purple-card: #c7b9f9;
+            --bg-body: #F0F2F5;           /* Abu-abu sangat muda kebiruan (Background) */
+            --text-main: #1A202C;         /* Hitam kebiruan (Text Utama) */
+            --text-light: #718096;        /* Abu-abu Cool (Text Secondary) */
+            
+            /* Warna Utama (Diambil dari tone biru tengah di gambar) */
+            --primary-blue: #315c86;      
+            --primary-light: #EBF4FF;     
+            
+            /* Palet untuk Kartu Statistik (Diambil dari gradasi gambar) */
+            /* Menggantikan kuning/pink dengan nuansa biru/abu */
+            --card-navy: #182a42;         /* Biru Paling Gelap */
+            --card-steel: #4a6fa5;        /* Biru Baja/Steel Blue */
+            --card-slate: #8aa6c1;        /* Biru Pucat/Slate */
+            --card-grey: #b6c9db;         /* Abu-abu Biru Terang */
+            
             --sidebar-width: 260px;
         }
 
@@ -33,6 +40,7 @@
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
+            color: var(--text-main);
         }
 
         /* --- SIDEBAR --- */
@@ -42,7 +50,7 @@
             padding: 30px;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid #eee;
+            border-right: 1px solid #e2e8f0;
             position: fixed;
             height: 100%;
             z-index: 1000;
@@ -52,7 +60,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: var(--purple-primary);
+            color: var(--primary-blue); /* Menggunakan Biru Utama */
             margin-bottom: 40px;
             display: flex;
             align-items: center;
@@ -60,11 +68,11 @@
         }
 
         .create-btn {
-            background-color: #fff;
-            color: #333;
+            background-color: var(--primary-blue); /* Tombol jadi Biru */
+            color: #fff; /* Teks Putih */
             padding: 12px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(49, 92, 134, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -75,7 +83,7 @@
         }
 
         .create-btn span.plus {
-            background: var(--purple-primary);
+            background: rgba(255,255,255,0.2);
             color: white;
             width: 30px;
             height: 30px;
@@ -97,19 +105,24 @@
             transition: 0.3s;
         }
         .menu-list a:hover, .menu-list a.active {
-            color: var(--purple-primary);
+            color: var(--primary-blue);
             font-weight: 600;
+            background: var(--primary-light);
+            padding: 10px;
+            border-radius: 8px;
+            margin-left: -10px; /* Kompensasi padding */
         }
 
         .upgrade-box {
             margin-top: auto;
-            background: #f0f0ff;
+            background: #F7FAFC; /* Background abu sangat muda */
             padding: 20px;
             border-radius: 15px;
             text-align: center;
+            border: 1px solid #EDF2F7;
         }
         .upgrade-btn {
-            background: var(--purple-primary);
+            background: var(--primary-blue);
             color: white;
             border: none;
             padding: 8px 20px;
@@ -143,13 +156,13 @@
         }
 
         .menu-toggle {
-            display: none; /* Hidden on desktop */
+            display: none; 
             font-size: 24px;
             cursor: pointer;
             color: var(--text-main);
         }
 
-        .breadcrumb h2 { font-size: 20px; font-weight: 700; }
+        .breadcrumb h2 { font-size: 20px; font-weight: 700; color: var(--card-navy); }
         .breadcrumb span { font-size: 12px; color: var(--text-light); }
 
         .header-actions {
@@ -162,7 +175,9 @@
             font-size: 18px;
             color: var(--text-light);
             cursor: pointer;
+            transition: 0.3s;
         }
+        .icon-btn:hover { color: var(--primary-blue); }
 
         .profile {
             display: flex;
@@ -172,36 +187,38 @@
             padding: 5px 15px 5px 5px;
             border-radius: 30px;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .avatar {
             width: 35px;
             height: 35px;
-            background: var(--purple-light);
-            color: var(--purple-primary);
+            background: var(--card-navy); /* Ubah ke Navy */
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Update CSS untuk icon */
             font-size: 16px; 
         }
 
-        /* Hero Banner */
+        /* Hero Banner - Update Gradasi Biru */
         .hero {
-            background: linear-gradient(to right, #eaddff, #f4eaff);
+            background: linear-gradient(135deg, var(--card-navy), var(--card-steel)); /* Gradasi Biru Tua ke Steel */
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 40px;
             display: flex;
             align-items: center;
+            color: white;
+            box-shadow: 0 10px 20px rgba(49, 92, 134, 0.15);
         }
 
-        .hero-text h1 { font-size: 32px; margin-bottom: 10px; color: var(--purple-primary); }
-        .hero-text p { color: #666; }
+        .hero-text h1 { font-size: 32px; margin-bottom: 10px; color: white; }
+        .hero-text p { color: rgba(255,255,255,0.8); }
 
-        /* Stats Cards */
-        .section-title { color: var(--text-light); font-size: 14px; margin-bottom: 15px; }
+        /* Stats Cards - Update Tone Monokromatik */
+        .section-title { color: var(--text-light); font-size: 14px; margin-bottom: 15px; font-weight: 600; letter-spacing: 0.5px; }
 
         .stats-grid {
             display: grid;
@@ -218,15 +235,20 @@
             flex-direction: column;
             justify-content: space-between;
             min-height: 100px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .stat-card.yellow { background-color: var(--yellow-card); }
-        .stat-card.dark { background-color: var(--purple-card); }
-        .stat-card.pink { background-color: var(--pink-card); }
-        .stat-card.soft { background-color: var(--soft-purple-card); }
+        /* Tone Warna Baru */
+        .stat-card.yellow { background-color: var(--card-navy); }  /* Paling gelap */
+        .stat-card.dark { background-color: var(--card-steel); }   /* Sedang */
+        .stat-card.pink { background-color: var(--card-slate); }   /* Terang */
+        .stat-card.soft { 
+            background-color: white; 
+            color: var(--card-navy); /* Khusus yg paling terang textnya gelap */
+            border: 1px solid #e2e8f0;
+        }
 
         .stat-card .icon { font-size: 20px; margin-bottom: 10px; opacity: 0.8; }
-        /* Animasi fade in saat angka berubah */
         .stat-card h3 { 
             font-size: 28px; 
             font-weight: 600; 
@@ -244,9 +266,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             flex-wrap: wrap; 
             gap: 15px;
+            border: 1px solid #f0f0f0;
         }
 
         .project-info {
@@ -256,20 +279,22 @@
             flex: 1;
         }
 
+        /* Thumbnail update warna */
         .thumbnail {
             width: 60px;
             height: 60px;
-            border-radius: 8px;
-            background-color: #eee;
+            border-radius: 12px;
+            background-color: var(--primary-light);
+            color: var(--primary-blue);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
         
-        .details h4 { color: var(--purple-primary); margin-bottom: 5px; }
+        .details h4 { color: var(--card-navy); margin-bottom: 5px; }
         .details p { font-size: 12px; color: var(--text-light); }
-        .details .slide-count { display: block; margin-top: 5px; font-weight: 600; font-size: 12px; color: #333; }
+        .details .slide-count { display: block; margin-top: 5px; font-weight: 600; font-size: 12px; color: var(--card-steel); }
 
         .actions {
             display: flex;
@@ -278,14 +303,15 @@
         }
 
         .toggle-switch {
-            width: 40px; height: 20px; background: #ccc; border-radius: 20px; position: relative; cursor: pointer;
+            width: 40px; height: 20px; background: #cbd5e0; border-radius: 20px; position: relative; cursor: pointer;
         }
-        .toggle-switch.active { background: var(--purple-primary); }
+        .toggle-switch.active { background: var(--card-steel); } /* Ganti warna toggle */
         .toggle-switch::after {
             content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: 0.3s;
         }
         .toggle-switch.active::after { left: 22px; }
-        .action-icons i { margin-left: 15px; color: var(--text-light); cursor: pointer; }
+        .action-icons i { margin-left: 15px; color: var(--text-light); cursor: pointer; transition: 0.2s;}
+        .action-icons i:hover { color: var(--card-navy); }
 
         /* --- RESPONSIVE CSS (MOBILE) --- */
         @media (max-width: 992px) {
@@ -367,7 +393,7 @@
         </ul>
 
         <div class="upgrade-box">
-            <div style="font-size: 40px; color: #5e5ce6; margin-bottom: 10px;">
+            <div style="font-size: 40px; color: var(--card-steel); margin-bottom: 10px;">
                 <i class="fas fa-brain"></i>
             </div>
             <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Upgrade to PRO for unlimited AI tokens.</p>
@@ -408,23 +434,19 @@
 
         <h3 class="section-title">Overview</h3>
         <section class="stats-grid">
-            <div class="stat-card yellow">
-                <div class="icon"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-card yellow"> <div class="icon"><i class="fas fa-chart-line"></i></div>
                 <h3 id="stat-productivity">83%</h3>
                 <p>Productivity</p>
             </div>
-            <div class="stat-card dark">
-                <div class="icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-card dark"> <div class="icon"><i class="fas fa-check-circle"></i></div>
                 <h3 id="stat-tasks">77%</h3>
                 <p>Tasks Done</p>
             </div>
-            <div class="stat-card pink">
-                <div class="icon"><i class="fas fa-star"></i></div>
+            <div class="stat-card pink"> <div class="icon"><i class="fas fa-star"></i></div>
                 <h3 id="stat-credits">91</h3>
                 <p>AI Credits</p>
             </div>
-            <div class="stat-card soft">
-                <div class="icon"><i class="fas fa-eye"></i></div>
+            <div class="stat-card soft"> <div class="icon"><i class="fas fa-eye"></i></div>
                 <h3 id="stat-views">126</h3>
                 <p>Total Views</p>
             </div>
@@ -433,8 +455,8 @@
         <section class="project-list">
             <div class="project-item">
                 <div class="project-info">
-                    <div class="thumbnail" style="background-color: #fdd05d;">
-                        <i class="fas fa-palette" style="font-size: 24px; color: white;"></i>
+                    <div class="thumbnail">
+                        <i class="fas fa-palette" style="font-size: 24px;"></i>
                     </div>
                     <div class="details">
                         <h4>AI Art Generator</h4>
@@ -443,7 +465,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <span style="font-size: 12px; font-weight: 600;">Public:</span>
+                    <span style="font-size: 12px; font-weight: 600; color:var(--text-light)">Public:</span>
                     <div class="toggle-switch active"></div>
                     <div class="action-icons">
                         <i class="fas fa-pen"></i>
@@ -454,8 +476,8 @@
 
             <div class="project-item">
                 <div class="project-info">
-                    <div class="thumbnail" style="background-color: #2c2c54;">
-                        <i class="fas fa-code" style="font-size: 24px; color: white;"></i>
+                    <div class="thumbnail">
+                        <i class="fas fa-code" style="font-size: 24px;"></i>
                     </div>
                     <div class="details">
                         <h4>Coding Assistant</h4>
@@ -464,7 +486,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <span style="font-size: 12px; font-weight: 600;">Private:</span>
+                    <span style="font-size: 12px; font-weight: 600; color:var(--text-light)">Private:</span>
                     <div class="toggle-switch"></div>
                     <div class="action-icons">
                         <i class="fas fa-pen"></i>
